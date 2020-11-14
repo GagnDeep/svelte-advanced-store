@@ -1,20 +1,20 @@
-<h1 align="center">Welcome to svelte-presistent-store 👋</h1>
+<h1 align="center">Welcome to svelte-advanced-store 👋</h1>
 <p>
-  <a href="https://www.npmjs.com/package/svelte-presistent-store" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/svelte-presistent-store.svg">
+  <a href="https://www.npmjs.com/package/svelte-advanced-store" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/svelte-advanced-store.svg">
   </a>
 </p>
 
 > A pesistent store for svelte based on svelte/store
 
-### 🏠 [Homepage](https://github.com/GagnDeep/svelte-presistent-store)
+### 🏠 [Homepage](https://github.com/GagnDeep/svelte-advanced-store)
 
-### ✨ [Demo](https://codesandbox.io/s/github/GagnDeep/svelte-presistent-store)
+### ✨ [Demo](https://codesandbox.io/s/github/GagnDeep/svelte-advanced-store)
 
 ## Install
 
 ```sh
-npm i svelte-presistent-store
+npm i svelte-advanced-store
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ npm run start
 ```
 
 ```javascript
-import { writable } from "svelte-presistent-store";
+import { writable } from "svelte-advanced-store";
 
 const store = writable("any-key", inititalStore);
 ```
@@ -40,5 +40,3 @@ const store = writable("any-key", inititalStore);
 Give a ⭐️ if this project helped you!
 
 ---
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
