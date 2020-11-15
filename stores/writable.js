@@ -1,63 +1,78 @@
-import _ from "lodash";
+import _, { isEmpty } from "lodash";
 import { writable, get } from "svelte/store";
 
 class Writable {
-  constructor(initialState, options) {
-    this.initialState = {
-      ..._.cloneDeep(initialState)
-    };
+  constructor(initialState, options = {}) {
+    this._persistentMode = options.key ? true : false;
 
-    this._persistentMode = true && options.key;
+    this.initialState =
+      this._persistentMode && !options.overwrite
+        ? this.getDataFromStorage(options.key, initialState)
+        : initialState;
 
-    let storedData = this._persistentMode
-      ? this.getDataFromStorage(options.key) || {}
-      : {};
-
+    console.log(this.initialState);
     this.options = {
       defineGettersAndSetters: true,
       key: null,
-      ...options,
-      ...storedData
+      ...options
     };
 
-    const store = writable(_.cloneDeep(initialState));
+    const store = writable(_.cloneDeep(this.initialState));
 
-    this.update = store.update;
-    this.subscribe = store.subscribe;
     this.writable = writable;
+    this.subscribe = store.subscribe;
 
+    this._update = store.update;
     this._set = store.set;
-    this.storeData();
 
     if (this.options.defineGettersAndSetters && _.isObject(initialState)) {
-      this.defineGettersAndSetters(initialState);
+      this.defineGettersAndSetters(this.initialState);
     }
+
+    this.storeData(this.json);
   }
 
-  set(...args) {
+  update(...args) {
+    const temp = this._update(...args);
+
     if (this._persistentMode) {
-      this.storeData(args[0]);
+      this.storeData(this.json);
     }
-    return this._set(...args);
+
+    return temp;
+  }
+  set(...args) {
+    const temp = this._set(...args);
+
+    if (this._persistentMode) {
+      this.storeData(this.json);
+    }
+    return temp;
   }
 
   storeData(data) {
-    if (!data) return;
+    if (isEmpty(data)) return;
     let string = JSON.stringify(data);
-    localStorage.setItem(this.key, string);
+    localStorage.setItem(this.options.key, string);
   }
 
-  getDataFromStorage(key) {
+  getDataFromStorage(key, initialState) {
     try {
       let data = localStorage.getItem(key);
       if (data) {
         const parsedData = JSON.parse(data);
+
+        if (isEmpty(parsedData)) {
+          return initialState;
+        }
         return parsedData;
+      } else {
+        return initialState;
       }
     } catch (err) {
       console.error(err);
     }
-    return null;
+    return initialState;
   }
 
   reset() {
