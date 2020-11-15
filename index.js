@@ -1,3 +1,3 @@
-import Writable from "./stores/Writable.js";
+import Writable from "./stores/writable.js";
 
 export { Writable };
