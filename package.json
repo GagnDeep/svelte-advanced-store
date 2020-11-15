@@ -1,11 +1,11 @@
 {
   "name": "svelte-advanced-store",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "gagandeep singh"
   },
   "main": "index.js",
-  "repository": "https://github.com/GagnDeep/svelte-presistent-store.git",
+  "repository": "https://github.com/GagnDeep/svelte-advanced-store.git",
   "description": "",
   "devDependencies": {
     "npm-run-all": "^4.1.5",
