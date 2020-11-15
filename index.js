@@ -1,3 +1,3 @@
-import writable from "./stores/writable";
+import Writable from "./stores/writable";
 
-export { writable };
+export { Writable };
