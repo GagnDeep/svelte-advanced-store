@@ -10,7 +10,6 @@ class Writable {
         ? this.getDataFromStorage(options.key, initialState)
         : initialState;
 
-    console.log(this.initialState);
     this.options = {
       defineGettersAndSetters: true,
       key: null,
